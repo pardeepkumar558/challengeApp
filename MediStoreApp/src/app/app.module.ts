@@ -8,13 +8,15 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
 import { Interceptor } from './interceptors/interceptor';
 import { MediaService } from './services/media.service';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    GalleryComponent
+    GalleryComponent,
+    ModalComponent
 
   ],
   imports: [

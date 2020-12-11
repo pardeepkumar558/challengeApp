@@ -6,8 +6,10 @@
 
             
             <div  *ngFor="let item of items" class="col-sm-6 col-md-4">
-                <a class="lightbox" href="#">
+                <a data-toggle="modal" data-toggle="modal"
+                data-target="#fsModal" class="lightbox" href="#">
                     <img [src]="item.Url" alt="Bridge">
+                    
                     
                 </a>
             </div>
@@ -18,3 +20,5 @@
     
     </div>
     </div>
+    <app-modal></app-modal>
+    
