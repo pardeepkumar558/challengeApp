@@ -12,12 +12,12 @@
                    
 
                     <ng-template [ngIf]="item.Type!='VIDEO'" [ngIfElse]="flag">
-                        <img [src]="item.Url" alt="Bridge">
-                  
+                        <img   style="width: 325px;height: 200px;"  [src]="item.Url" alt="Bridge">
+                       
                       </ng-template>
                        <ng-template #flag>
-                        <img [src]="item.ThumbnailUrl" alt="Bridge">
-                     
+                        <img style="width: 325px;height: 200px;" [src]="item.ThumbnailUrl" alt="Bridge">
+                       
                       </ng-template>
 
                  </a>
@@ -42,7 +42,7 @@
           
           <ng-template #notShow>
               <div  class="swipe" (swipeleft)="onSwipeLeft($event)" (swiperight)="onSwipeRight($event)" >
-              <iframe  width="560" height="315" src="https://www.youtube.com/embed/1rYGCP52fG8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe  width="560" height="315" [src]="item.Url" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>
 
            
@@ -57,3 +57,4 @@
     </ng-template>
 </p-galleria>
 
+Image by <a href="https://pixabay.com/users/picsbyfran-6087762/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2785074">PicsbyFran</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2785074">Pixabay</a>
