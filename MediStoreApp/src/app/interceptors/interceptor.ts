@@ -17,23 +17,7 @@ export class Interceptor implements HttpInterceptor {
                 itm.Id = i;
                 itm.ThumbnailUrl = "";
                 console.log(i % 3);
-                // if (i % 5 == 0||i % 3 == 1) {
-                //     itm.Type = "VIDEO";
-                //     itm.ThumbnailUrl = "https://img.youtube.com/vi/"+this.videosUrls[(Math.floor((Math.random() * 30) + 1) % 8)]+"/0.jpg";
-                //     itm.Url = "https://www.youtube.com/embed/"+this.videosUrls[(Math.floor((Math.random() * 30) + 1) % 8)];
-                // }
-                // else if (i % 3 == 1||i % 7 == 1) {
-
-
-                //     itm.Type = "GIF";
-                //     itm.Url = "../assets/images/"+(Math.floor((Math.random() * 30) + 1) % 5)+".gif";
-
-                // }
-                // else  {
-                //     itm.Type = "IMG";
-                //     itm.Url = "../assets/images/" + (Math.floor((Math.random() * 30) + 1) % 9) + ".jpg";
-                // }
-
+                
 
                 this.items.push(this.setData(itm));
 
@@ -60,7 +44,7 @@ export class Interceptor implements HttpInterceptor {
         }
         else  {
             itm.Type = "IMG";
-            itm.Url = "../assets/images/" + (Math.floor((Math.random() * 30) + 1) % 9) + ".jpg";
+            itm.Url = "../assets/images/" + (Math.floor((Math.random() * 30) + 1) % 12) + ".jpg";
         }
         return itm;
     }

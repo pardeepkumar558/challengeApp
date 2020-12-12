@@ -13,6 +13,7 @@ import * as Hammer from 'hammerjs';
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {HammerConfigService} from '../app/hammer-config.service';
 import {GalleriaModule} from 'primeng/galleria';
+import { SafePipe } from './safe.pipe';
 
 @Injectable() 
 export class MyHammerConfig extends HammerGestureConfig { 
@@ -27,7 +28,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     HeaderComponent,
     GalleryComponent,
-    ModalComponent
+    ModalComponent,
+    SafePipe
     
 
   ],
