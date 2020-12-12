@@ -15,6 +15,7 @@ import {HammerConfigService} from '../app/hammer-config.service';
 import {GalleriaModule} from 'primeng/galleria';
 import { SafePipe } from './safe.pipe';
 import { ReportComponent } from './report/report.component';
+import {ChartModule} from 'primeng/chart';
 
 @Injectable() 
 export class MyHammerConfig extends HammerGestureConfig { 
@@ -40,7 +41,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppRoutingModule,
     HttpClientModule,
     GalleriaModule,
-    HammerModule
+    HammerModule,
+    ChartModule
   
   ],
   providers: [MediaService, {
