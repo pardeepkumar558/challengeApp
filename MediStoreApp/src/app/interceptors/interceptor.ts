@@ -16,8 +16,27 @@ export class Interceptor implements HttpInterceptor {
                     let itm=new Item();
                     itm.Id=i;
                     itm.ThumbnailUrl="";
-                    itm.Type="Temp";
-                    itm.Url="../assets/images/a.jpeg";
+                   console.log(i%3);
+                    if(i%3==0)
+                    {
+                        itm.Type="IMG";
+                        itm.Url="../assets/images/a.jpeg";
+                    }
+                    else if(i%3==1)
+                    {
+                       
+                        itm.Type="GIF";
+                        itm.Url="../assets/images/c.gif";  
+                       
+                                    }
+                    else if(i%3==2)
+                    {
+                        itm.Type="VIDEO";
+                        itm.ThumbnailUrl="https://img.youtube.com/vi/1rYGCP52fG8/0.jpg"
+                        itm.Url="https://www.youtube.com/embed/1rYGCP52fG8";
+                    }
+
+                   
                     this.items.push(itm);
 
                 }

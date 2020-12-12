@@ -5,13 +5,22 @@
         <div class="row">
 
             
-            <div  *ngFor="let item of items" class="col-sm-6 col-md-4">
-                <a data-toggle="modal" data-toggle="modal"
-                data-target="#fsModal" class="lightbox" href="#">
-                    <img [src]="item.Url" alt="Bridge">
-                    
-                    
-                </a>
+            <div  *ngFor="let item of items" class="col-sm-6 col-md-4" > 
+                <!-- data-toggle="modal" data-toggle="modal" data-target="#fsModal" -->
+                
+                <a (click)="SelectItem(item.Id)"  class="lightbox" href="#">
+                   
+
+                    <ng-template [ngIf]="item.Type!='VIDEO'" [ngIfElse]="flag">
+                        <img [src]="item.Url" alt="Bridge">
+                  
+                      </ng-template>
+                       <ng-template #flag>
+                        <img [src]="item.ThumbnailUrl" alt="Bridge">
+                     
+                      </ng-template>
+
+                 </a>
             </div>
            
             
@@ -20,5 +29,31 @@
     
     </div>
     </div>
-    <app-modal></app-modal>
+    <app-modal [currentItem]="selectedItem" [fetchedItems]="items"></app-modal>
     
+    <p-galleria [(value)]="items" [(visible)]="showModal" [activeIndex]="galleryIndex" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '850px'}" [numVisible]="7"
+    [circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000"> 
+    <ng-template pTemplate="item" let-item>
+
+        <ng-template [ngIf]="item.Type=='IMG'||item.Type=='GIF'" [ngIfElse]="notShow">
+            <img class="swipe" (swipeleft)="onSwipeLeft($event)" (swiperight)="onSwipeRight($event)" [src]="item.Url" style="width: 100%; display: block;"/>
+       
+          </ng-template>
+          
+          <ng-template #notShow>
+              <div  class="swipe" (swipeleft)="onSwipeLeft($event)" (swiperight)="onSwipeRight($event)" >
+              <iframe  width="560" height="315" src="https://www.youtube.com/embed/1rYGCP52fG8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+
+           
+          </ng-template>
+
+       
+    </ng-template>
+    <ng-template pTemplate="thumbnail" let-item>
+        <div class="p-grid p-nogutter p-justify-center">
+            <img [src]="item.Url" style="display: block;"/>
+        </div>
+    </ng-template>
+</p-galleria>
+

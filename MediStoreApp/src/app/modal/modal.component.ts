@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit,Input } from '@angular/core';
+import {Item} from '../models/item';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -8,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class ModalComponent implements OnInit {
 
   constructor() { }
+  @Input() currentItem: Item;
+  @Input() fetchedItems: Item[];
 
   ngOnInit(): void {
   }
-
+  swipe(id)
+  {
+alert("id");
+  }
 }

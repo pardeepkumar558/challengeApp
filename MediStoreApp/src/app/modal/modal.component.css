@@ -175,3 +175,23 @@
   ::-webkit-scrollbar-thumb {
     background: #b5c0cb;
   }
+  .container {
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+    align-content: center;
+  }
+  .main-container
+  {
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+    align-items: center;
+  }
+  .item1 {
+    flex-grow: 2; /* default 0 */
+  }
+  .item2 {
+    flex-grow: 8; /* default 0 */
+  }
+  .item3{
+    flex-grow: 2; /* default 0 */
+  }
