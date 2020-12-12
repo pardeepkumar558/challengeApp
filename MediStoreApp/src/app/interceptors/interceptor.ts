@@ -3,11 +3,12 @@ import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse } fr
 import { Observable, of } from 'rxjs';
 import { Item } from '../models/item';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
     items: Item[];
-    videosUrls:string[]=["eg2g6FPsdLI","H9JlOwA-zO8","XUv7Z9DMtLA","HccqokXN2n8","gRIx7ByM-Fs","o-7fsuJtEhk","XbqfQPiQdAU","w9oRl9ppKFU","HP1pMW5MKYY"];
+    videosUrls: string[] = ["eg2g6FPsdLI", "H9JlOwA-zO8", "XUv7Z9DMtLA", "HccqokXN2n8", "gRIx7ByM-Fs", "o-7fsuJtEhk", "XbqfQPiQdAU", "w9oRl9ppKFU", "HP1pMW5MKYY"];
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if (request.method === "GET" && request.url.includes("GetItems")) {
@@ -17,7 +18,7 @@ export class Interceptor implements HttpInterceptor {
                 itm.Id = i;
                 itm.ThumbnailUrl = "";
                 console.log(i % 3);
-                
+
 
                 this.items.push(this.setData(itm));
 
@@ -27,24 +28,37 @@ export class Interceptor implements HttpInterceptor {
         }
         return next.handle(request);
     }
-    setData(itm:Item)
-    {
-        var i=Math.floor((Math.random() * 100) + 1) % 3;
-        if (i==0) {
+    setData(itm: Item) {
+        var i = Math.floor((Math.random() * 100) + 1) % 3;
+        if (i == 0) {
             itm.Type = "VIDEO";
-            itm.ThumbnailUrl = "https://img.youtube.com/vi/"+this.videosUrls[(Math.floor((Math.random() * 30) + 1) % 8)]+"/0.jpg";
-            itm.Url = "https://www.youtube.com/embed/"+this.videosUrls[(Math.floor((Math.random() * 30) + 1) % 8)];
+            itm.ThumbnailUrl = "https://img.youtube.com/vi/" + this.videosUrls[(Math.floor((Math.random() * 30) + 1) % 8)] + "/0.jpg";
+            itm.Url = "https://www.youtube.com/embed/" + this.videosUrls[(Math.floor((Math.random() * 30) + 1) % 8)];
         }
-        else if (i==1) {
+        else if (i == 1) {
 
 
             itm.Type = "GIF";
-            itm.Url = "../assets/images/"+(Math.floor((Math.random() * 30) + 1) % 5)+".gif";
+            if (environment.production) {
+                itm.Url = "../challenge/assets/images/" + (Math.floor((Math.random() * 30) + 1) % 5) + ".gif";
+
+            }
+            else {
+                itm.Url = "../assets/images/" + (Math.floor((Math.random() * 30) + 1) % 5) + ".gif";
+            }
+
 
         }
-        else  {
+        else {
             itm.Type = "IMG";
-            itm.Url = "../assets/images/" + (Math.floor((Math.random() * 30) + 1) % 12) + ".jpg";
+            if (environment.production) {
+                itm.Url = "../challenge/assets/images/" + (Math.floor((Math.random() * 30) + 1) % 12) + ".jpg";
+
+                
+            }
+            else {
+                itm.Url = "../assets/images/" + (Math.floor((Math.random() * 30) + 1) % 12) + ".jpg";
+            }
         }
         return itm;
     }
