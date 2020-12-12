@@ -14,6 +14,7 @@ import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angula
 import {HammerConfigService} from '../app/hammer-config.service';
 import {GalleriaModule} from 'primeng/galleria';
 import { SafePipe } from './safe.pipe';
+import { ReportComponent } from './report/report.component';
 
 @Injectable() 
 export class MyHammerConfig extends HammerGestureConfig { 
@@ -29,7 +30,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     HeaderComponent,
     GalleryComponent,
     ModalComponent,
-    SafePipe
+    SafePipe,
+    ReportComponent
     
 
   ],
