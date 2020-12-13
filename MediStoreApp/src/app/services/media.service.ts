@@ -13,4 +13,8 @@ export class MediaService {
   GetItems() {
     return this.Http.get(environment.url+"GetItems");
   }
+  GetBusinessData()
+  {
+    return this.Http.get(environment.url+"GetBusinessData");
+  }
 }

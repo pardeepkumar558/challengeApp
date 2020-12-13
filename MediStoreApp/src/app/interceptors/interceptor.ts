@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Item } from '../models/item';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { environment } from '../../environments/environment';
+import * as data from '../../assets/data/data.json';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
@@ -25,6 +26,10 @@ export class Interceptor implements HttpInterceptor {
             }
             return of(new HttpResponse({ status: 200, body: this.items }));
 
+        }
+        else if(request.method === "GET" && request.url.includes("GetBusinessData"))
+        {
+            return of(new HttpResponse({ status: 200, body: data }));
         }
         return next.handle(request);
     }

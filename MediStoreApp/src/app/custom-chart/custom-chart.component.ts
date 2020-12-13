@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-declare var d3:any;
-import {Entity} from '../models/entity';
+declare var d3: any;
+import { Entity } from '../models/entity';
+import { MediaService } from '../services/media.service';
+import { BusinessEntity } from '../models/business-entity'
 
 @Component({
   selector: 'app-custom-chart',
@@ -8,53 +10,80 @@ import {Entity} from '../models/entity';
   styleUrls: ['./custom-chart.component.css']
 })
 export class CustomChartComponent implements OnInit {
-  val:number=2000;
-  min:number=1900;
-  max:number=2050;
-  step:number=1;
-  constructor() { }
- 
+  currentYear: number = 2020;
+  min: number = 1849;
+  max: number = 2020;
+  step: number = 1;
+  businessEntityData:BusinessEntity[];
+  constructor(private _mediaService: MediaService) { }
+
   ngOnInit(): void {
-this.createChart();
+   
+    this._mediaService.GetBusinessData().subscribe(
+      (data:any) => {
+        this.businessEntityData=data.default as BusinessEntity[];
+         let YearData:BusinessEntity[];
+         YearData=[];
+         YearData=this.businessEntityData.filter(x=>x.BusinessStartYear==this.currentYear.toString());
+        const grouped = this.groupBy(YearData, dt => dt.Neighborhoods);
+        this.createChart(grouped);
+        console.log("this is data");
+        console.log(grouped);
+      }
+    );
   }
-  createChart() {
+
+  filterData()
+  {
+
+    let YearData:BusinessEntity[];
+    YearData=[];
+    YearData=this.businessEntityData.filter(x=>x.BusinessStartYear==this.currentYear.toString());
+    const grouped = this.groupBy(YearData, dt => dt.Neighborhoods);
+    this.createChart(grouped);
+  }
+  createChart(chartInputData) {
+    
+    //To clean Chart
+    document.getElementById("mychart").innerHTML="";
+
     var yOverview;
     var DATA_COUNT = 50;
     var MAX_LABEL_LENGTH = 30;
 
     var data = [];
 
-    for (var i = 0; i < DATA_COUNT; i++) {
-      var datum = new Entity();
-      datum.label = stringGen(MAX_LABEL_LENGTH)
-      datum.value = Math.floor(Math.random() * 600);
-      data.push(datum);
+    // for (var i = 0; i < DATA_COUNT; i++) {
+    //   var datum = new Entity();
+    //   datum.label = stringGen(MAX_LABEL_LENGTH)
+    //   datum.value = Math.floor(Math.random() * 600);
+    //   data.push(datum);
+      
+    // }
+    for(var entity of chartInputData)
+    {var datum = new Entity();
+        datum.label = entity[0];
+        datum.value = entity[1].length;
+        data.push(datum);
+
     }
+    data=data.sort((a, b) => {
+      return b.value-a.value;
+    });
+    console.log("chart Data is mainly");
+    console.log(data)
 
-    function stringGen(maxLength) {
-      var text = "";
-      var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
-
-      for (var i = 0; i < getRandomArbitrary(1, maxLength); i++) {
-        text += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-
-      return text;
-    }
-
-    function getRandomArbitrary(min, max) {
-      return Math.round(Math.random() * (max - min) + min);
-    }
+    
 
     var margin = { top: 20, right: 10, bottom: 20, left: 40 };
     var marginOverview = { top: 30, right: 10, bottom: 20, left: 40 };
     var selectorHeight = 40;
-    var width = 900 - margin.left - margin.right;
+    var width = 1020 - margin.left - margin.right;
     var height = 400 - margin.top - margin.bottom - selectorHeight;
     var heightOverview = 80 - marginOverview.top - marginOverview.bottom;
 
     var maxLength = d3.max(data.map(function (d) { return d.label.length }))
-    var barWidth = maxLength * 7;
+    var barWidth = maxLength *15;
     var numBars = Math.round(width / barWidth);
     var isScrollDisplayed = barWidth * data.length > width;
 
@@ -79,17 +108,17 @@ this.createChart();
       .attr("height", height + margin.top + margin.bottom + selectorHeight);
 
     var diagram = svg.append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + (margin.left+20) + "," + margin.top + ")");
 
     diagram.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0, " + height + ")")
-      .attr("style"," fill: black;")
+      .attr("style", " fill: black;")
       .call(xAxis);
 
     diagram.append("g")
       .attr("class", "y axis")
-      .attr("style"," fill: black;")
+      .attr("style", " fill: black;")
       .call(yAxis);
 
     var bars = diagram.append("g");
@@ -101,7 +130,7 @@ this.createChart();
       .attr("x", function (d) { return xscale(d.label); })
       .attr("y", function (d) { return yscale(d.value); })
       .attr("width", xscale.rangeBand())
-      .attr("style","fill:#4682b4")
+      .attr("style", "fill:#4682b4")
       .attr("height", function (d) { return height - yscale(d.value); });
 
 
@@ -132,7 +161,7 @@ this.createChart();
           y: function (d) {
             return height + heightOverview + yOverview(d.value)
           }
-        }).attr("style","fill:#CCC")
+        }).attr("style", "fill:#CCC")
 
       var displayed = d3.scale.quantize()
         .domain([0, width])
@@ -146,7 +175,7 @@ this.createChart();
         .attr("height", selectorHeight)
         .attr("width", Math.round(parseFloat((numBars * width).toString()) / data.length))
         .attr("pointer-events", "all")
-        .attr("cursor", "ew-resize").attr("style"," stroke: red;stroke-opacity: .1; fill: lightSteelBlue;fill-opacity: .5;")
+        .attr("cursor", "ew-resize").attr("style", " stroke: red;stroke-opacity: .1; fill: lightSteelBlue;fill-opacity: .5;")
         .call(d3.behavior.drag().on("drag", display));
     }
     function display() {
@@ -182,10 +211,27 @@ this.createChart();
         .attr("y", function (d) { return yscale(d.value); })
         .attr("width", xscale.rangeBand())
         .attr("height", function (d) { return height - yscale(d.value); })
-        .attr("style","fill:#4682b4");
+        .attr("style", "fill:#4682b4");
 
       rects.exit().remove();
     };
   }
+   groupBy(list, keyGetter) {
+    const map = new Map();
+    list.forEach((item) => {
+         const key = keyGetter(item);
+         const collection = map.get(key);
+         if (!collection) {
+             map.set(key, [item]);
+         } else {
+             collection.push(item);
+         }
+    });
+    return map;
+}
+handleChange(e)
+{
+  this.filterData();
+}
 
 }

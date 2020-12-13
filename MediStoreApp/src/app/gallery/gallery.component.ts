@@ -42,7 +42,7 @@ export class GalleryComponent implements OnInit {
         this.allItems = items;
         this.fetcNextPage();
       }
-    )
+    );
   }
 
   public fetcNextPage() {
