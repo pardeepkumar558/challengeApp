@@ -16,6 +16,7 @@ import {GalleriaModule} from 'primeng/galleria';
 import { SafePipe } from './safe.pipe';
 import { ReportComponent } from './report/report.component';
 import {ChartModule} from 'primeng/chart';
+import { CustomChartComponent } from './custom-chart/custom-chart.component';
 
 @Injectable() 
 export class MyHammerConfig extends HammerGestureConfig { 
@@ -32,7 +33,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     GalleryComponent,
     ModalComponent,
     SafePipe,
-    ReportComponent
+    ReportComponent,
+    CustomChartComponent
     
 
   ],
