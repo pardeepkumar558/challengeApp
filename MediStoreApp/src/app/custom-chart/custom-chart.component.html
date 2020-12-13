@@ -2,7 +2,8 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row" style="padding-top:30px;">
-				<div class="col-md-1">
+				<div class="col-md-1" style="display: flex; align-items: center;">
+					<div id="pp" style=" transform: rotate(-90deg); white-space: nowrap;"><b>No. of  Business</b></div>
 				</div>
 				<div class="col-md-10">
 					<div class="page-header" style="text-align: center;">
@@ -11,17 +12,17 @@
 						</h3>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
-                            <div id="mychart"></div>
+						<div class="col-md-12" style="text-align: center;">
+							
+							<div id="mychart"></div>
+							<div><b>Neigborhoods</b></div>
 						</div>
 					</div>
 					<div class="row slider" >
-						<div class="col-md-2">
-                             Year: 
-                        </div>
-                        <div class="col-md-10">
+						
+                        <div class="col-md-12">
                            
-                            <p-slider (onChange)="handleChange($event)" [(ngModel)]="currentYear" [min]="min" [max]="max" [step]="step"></p-slider>
+                            Choose Year:  <p-slider (onChange)="handleChange($event)" [(ngModel)]="currentYear" [min]="min" [max]="max" [step]="step"></p-slider>
                          </div>
 					</div>
 				</div>

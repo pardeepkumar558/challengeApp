@@ -62,7 +62,7 @@ export class CustomChartComponent implements OnInit {
     // }
     for(var entity of chartInputData)
     {var datum = new Entity();
-        datum.label = entity[0];
+        datum.label = entity[0]==""?"Unknown":entity[0];
         datum.value = entity[1].length;
         data.push(datum);
 
@@ -109,6 +109,8 @@ export class CustomChartComponent implements OnInit {
 
     var diagram = svg.append("g")
       .attr("transform", "translate(" + (margin.left+20) + "," + margin.top + ")");
+
+      svg.append("g").append("text")
 
     diagram.append("g")
       .attr("class", "x axis")
@@ -211,7 +213,7 @@ export class CustomChartComponent implements OnInit {
         .attr("y", function (d) { return yscale(d.value); })
         .attr("width", xscale.rangeBand())
         .attr("height", function (d) { return height - yscale(d.value); })
-        .attr("style", "fill:#4682b4");
+        .attr("style", "fill:#4682b4").append("text").text("dfdsf");
 
       rects.exit().remove();
     };
