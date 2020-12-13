@@ -17,6 +17,8 @@ import { SafePipe } from './safe.pipe';
 import { ReportComponent } from './report/report.component';
 import {ChartModule} from 'primeng/chart';
 import { CustomChartComponent } from './custom-chart/custom-chart.component';
+import {SliderModule} from 'primeng/slider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Injectable() 
 export class MyHammerConfig extends HammerGestureConfig { 
@@ -44,7 +46,10 @@ export class MyHammerConfig extends HammerGestureConfig {
     HttpClientModule,
     GalleriaModule,
     HammerModule,
-    ChartModule
+    ChartModule,
+    SliderModule,
+    FormsModule,
+    ReactiveFormsModule
   
   ],
   providers: [MediaService, {

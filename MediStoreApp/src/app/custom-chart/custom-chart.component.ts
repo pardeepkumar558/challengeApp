@@ -8,7 +8,10 @@ import {Entity} from '../models/entity';
   styleUrls: ['./custom-chart.component.css']
 })
 export class CustomChartComponent implements OnInit {
-
+  val:number=2000;
+  min:number=1900;
+  max:number=2050;
+  step:number=1;
   constructor() { }
  
   ngOnInit(): void {
@@ -46,7 +49,7 @@ this.createChart();
     var margin = { top: 20, right: 10, bottom: 20, left: 40 };
     var marginOverview = { top: 30, right: 10, bottom: 20, left: 40 };
     var selectorHeight = 40;
-    var width = 600 - margin.left - margin.right;
+    var width = 900 - margin.left - margin.right;
     var height = 400 - margin.top - margin.bottom - selectorHeight;
     var heightOverview = 80 - marginOverview.top - marginOverview.bottom;
 
@@ -98,7 +101,7 @@ this.createChart();
       .attr("x", function (d) { return xscale(d.label); })
       .attr("y", function (d) { return yscale(d.value); })
       .attr("width", xscale.rangeBand())
-      .attr("style","fill:#0b3954")
+      .attr("style","fill:#4682b4")
       .attr("height", function (d) { return height - yscale(d.value); });
 
 
@@ -179,7 +182,7 @@ this.createChart();
         .attr("y", function (d) { return yscale(d.value); })
         .attr("width", xscale.rangeBand())
         .attr("height", function (d) { return height - yscale(d.value); })
-        .attr("style","fill:#0b3954");
+        .attr("style","fill:#4682b4");
 
       rects.exit().remove();
     };

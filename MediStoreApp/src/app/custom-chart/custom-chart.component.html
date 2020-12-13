@@ -1,1 +1,33 @@
-<div id="mychart"></div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row" style="padding-top:30px;">
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-8">
+					<div class="page-header" style="text-align: center;">
+						<h3>
+							Report for Registered Businesses - San Francisco: {{val}}
+						</h3>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+                            <div id="mychart"></div>
+						</div>
+					</div>
+					<div class="row slider" >
+						<div class="col-md-2">
+                             Year: 
+                        </div>
+                        <div class="col-md-10">
+                           
+                            <p-slider [(ngModel)]="val" [min]="min" [max]="max" [step]="step"></p-slider>
+                         </div>
+					</div>
+				</div>
+				<div class="col-md-2">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
