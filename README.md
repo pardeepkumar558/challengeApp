@@ -2,6 +2,8 @@
 
 MediStore (Media Store) is specially created for a coding challenge.
 
+Application published at https://pardeepkumar558.github.io/challenge/
+
 Application developed using Angular 11.
 Supporting libraries:
 1.PrimeNg
