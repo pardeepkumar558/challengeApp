@@ -12,11 +12,11 @@
                    
 
                     <ng-template [ngIf]="item.Type!='VIDEO'" [ngIfElse]="flag">
-                        <img   style="width: 325px;height: 200px;"  [src]="item.Url" alt="Bridge">
+                        <img   style="height: 200px;"  [src]="item.Url" alt="Bridge">
                        
                       </ng-template>
                        <ng-template #flag>
-                        <img style="width: 325px;height: 200px;" [src]="item.ThumbnailUrl" alt="Bridge">
+                        <img style="height: 200px;" [src]="item.ThumbnailUrl" alt="Bridge">
                        
                       </ng-template>
 
@@ -29,7 +29,7 @@
     
     </div>
     </div>
-    <app-modal [currentItem]="selectedItem" [fetchedItems]="items"></app-modal>
+    
     
     <p-galleria [(value)]="items" [(visible)]="showModal" [activeIndex]="galleryIndex" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '850px'}" [numVisible]="7"
     [circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000"> 
