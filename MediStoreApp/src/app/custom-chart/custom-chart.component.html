@@ -1,32 +1,36 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="row" style="padding-top:30px;">
-				<div class="col-md-1" style="display: flex; align-items: center;">
-					<div id="pp" style=" transform: rotate(-90deg); white-space: nowrap;"><b>No. of  Business</b></div>
+			<div class="row" style="padding-top:70px;">
+				<div class="col-sm-1">
+					
 				</div>
-				<div class="col-md-10">
+				<div class="col-sm-10">
 					<div class="page-header" style="text-align: center;">
-						<h3>
+						<h6>
 							Report for Registered Businesses - San Francisco: {{currentYear}}
-						</h3>
+						</h6>
 					</div>
 					<div class="row">
-						<div class="col-md-12" style="text-align: center;">
+						<div class="col-sm-12" style="text-align: center;">
 							
 							<div id="mychart"></div>
-							<div><b>Neigborhoods</b></div>
+							<!-- <div><b>Neigborhoods</b></div> -->
 						</div>
 					</div>
 					<div class="row slider" >
 						
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                            
                             Choose Year:  <p-slider (onChange)="handleChange($event)" [(ngModel)]="currentYear" [min]="min" [max]="max" [step]="step"></p-slider>
+						 </div>
+						 <div class="col-sm-12">
+                           
+                           <span style="float: left;">{{min}}</span><span style="float: right;margin-right: 20px;">{{max}}</span>
                          </div>
 					</div>
 				</div>
-				<div class="col-md-1">
+				<div class="col-sm-1">
 				</div>
 			</div>
 		</div>

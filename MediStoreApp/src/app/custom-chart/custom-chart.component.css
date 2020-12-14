@@ -1,4 +1,10 @@
 .slider
 {
     margin-top: 20px;
+    font-family: Tahoma;
+    font-size: 12px;
+}
+.page-header h6
+{
+    font-weight: bolder;
 }

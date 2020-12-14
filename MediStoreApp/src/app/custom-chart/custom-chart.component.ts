@@ -78,7 +78,7 @@ export class CustomChartComponent implements OnInit {
     var margin = { top: 20, right: 10, bottom: 20, left: 40 };
     var marginOverview = { top: 30, right: 10, bottom: 20, left: 40 };
     var selectorHeight = 40;
-    var width = 1020 - margin.left - margin.right;
+    var width = 1060 - margin.left - margin.right;
     var height = 400 - margin.top - margin.bottom - selectorHeight;
     var heightOverview = 80 - marginOverview.top - marginOverview.bottom;
 
@@ -86,12 +86,7 @@ export class CustomChartComponent implements OnInit {
     var barWidth = maxLength *8;
     var numBars = Math.round(width / barWidth);
     var isScrollDisplayed = barWidth * data.length > width;
-
-
-    console.log(isScrollDisplayed)
-    console.log("gggggggggggggggggggggg");
-    console.log(d3);
-
+    
     var xscale = d3.scale.ordinal()
       .domain(data.slice(0, numBars).map(function (d) { return d.label; }))
       .rangeBands([0, width], .2);
@@ -103,24 +98,42 @@ export class CustomChartComponent implements OnInit {
     var xAxis = d3.svg.axis().scale(xscale).orient("bottom");
     var yAxis = d3.svg.axis().scale(yscale).orient("left");
 
-    var svg = d3.select("#mychart").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom + selectorHeight);
+    var svg = d3.select("#mychart").append("svg").attr("viewBox", "0 0 "+(width + margin.left + margin.right)+" "+(height + margin.top + margin.bottom + selectorHeight));
+      // .attr("width", width + margin.left + margin.right)
+      // .attr("height", height + margin.top + margin.bottom + selectorHeight);
+
+     
 
     var diagram = svg.append("g")
-      .attr("transform", "translate(" + (margin.left+20) + "," + margin.top + ")");
+      .attr("transform", "translate(" + (margin.left+40) + "," + margin.top + ")");
 
-      svg.append("g").append("text")
+      svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", 6)
+    .attr("style","font-style:Bold;font-family:Tahoma;font-size:18px;")
+    .attr("dy", ".60em")
+    .attr("dx", "-5em")
+    .attr("transform", "rotate(-90)")
+    .text("No. of Registered Business");
+
+    svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("style","font-style:Bold;font-family:Tahoma;font-size:18px;")
+    .attr("x", width-450)
+    .attr("y", height + margin.top + margin.bottom + selectorHeight-10)
+    .text("Neighborhoods");
 
     diagram.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0, " + height + ")")
-      .attr("style", " fill: black;")
+      .attr("style", " fill: black;font:14px bold Tahoma")
       .call(xAxis);
 
     diagram.append("g")
       .attr("class", "y axis")
-      .attr("style", " fill: black;")
+      .attr("style", " fill: black;font:14px bold Tahoma")
       .call(yAxis);
 
     var bars = diagram.append("g");
@@ -133,9 +146,10 @@ export class CustomChartComponent implements OnInit {
       .attr("y", function (d) { return yscale(d.value); })
       .attr("width", xscale.rangeBand())
       .attr("style", "fill:#4682b4")
-      .attr("height", function (d) { return height - yscale(d.value); });
+      .attr("height", function (d) { return height - yscale(d.value); })
+      .append('text',function (d) { return d.value });
 
-
+      
 
     if (isScrollDisplayed) {
       var xOverview = d3.scale.ordinal()
@@ -163,7 +177,7 @@ export class CustomChartComponent implements OnInit {
           y: function (d) {
             return height + heightOverview + yOverview(d.value)
           }
-        }).attr("style", "fill:#CCC")
+        }).attr("style", "fill:#4682b4")
 
       var displayed = d3.scale.quantize()
         .domain([0, width])
