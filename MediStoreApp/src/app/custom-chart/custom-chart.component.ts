@@ -83,7 +83,7 @@ export class CustomChartComponent implements OnInit {
     var heightOverview = 80 - marginOverview.top - marginOverview.bottom;
 
     var maxLength = d3.max(data.map(function (d) { return d.label.length }))
-    var barWidth = maxLength *15;
+    var barWidth = maxLength *8;
     var numBars = Math.round(width / barWidth);
     var isScrollDisplayed = barWidth * data.length > width;
 
